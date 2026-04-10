@@ -1,0 +1,58 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h1>Product Search</h1>
+<input type="text" id="search" class="form-control" placeholder="Search product...">
+<div id="products"></div>
+
+<script>
+async function searchProducts(keyword="") {
+    // 1. อ่านค่า Token ใหม่ล่าสุดจาก Local Storage
+    let token = localStorage.getItem("token");
+
+    // 2. ถ้าไม่มี Token (ยังไม่ได้ล็อกอิน) อาจจะให้แสดงข้อความเตือน
+    if (!token) {
+        document.getElementById("products").innerHTML = "<p class='text-danger'>Please log in to search products.</p>";
+        return;
+    }
+
+    // 3. ส่ง Request ไปพร้อมกับ Token ที่อ่านมาได้
+    let res = await fetch(`/api/products/search?search=${keyword}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // ใช้ตัวแปร token ตรงนี้
+      }
+    });
+
+    // 4. เช็คว่าถ้า Token หมดอายุ หรือไม่ถูกต้อง
+    if (res.status === 401) {
+        document.getElementById("products").innerHTML = "<p class='text-danger'>Session expired. Please log in again.</p>";
+        // เสริม: อาจจะสั่ง localStorage.removeItem("token") และ redirect ไปหน้า login ตรงนี้ได้
+        return;
+    }
+
+    let data = await res.json()
+    let html = data.map(p => `
+        <div class="card p-3 my-3">
+            <h4>${p.name}</h4>
+            <p>${p.price} THB</p>
+        </div>
+    `).join("")
+    document.getElementById("products").innerHTML = html
+}
+
+// Trigger on typing
+document.getElementById("search").addEventListener("input", function() {
+  searchProducts(this.value)
+})
+
+// Initial load
+searchProducts()
+</script>
+
+{% endblock %}
+
+
+
+

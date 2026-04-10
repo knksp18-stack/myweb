@@ -1,0 +1,6 @@
+fastapi[standard]
+sqlalchemy
+jinja2
+easyocr
+itsdangerous
+pyjwt
