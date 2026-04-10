@@ -7,3 +7,7 @@ uvicorn main:app --reload
 python seed.py
 
 ## วิธีการใช้งาน
+-เปิดserver
+-เข้าไปใช้งาน localhost:8000
+
+ทดสอบ by me
