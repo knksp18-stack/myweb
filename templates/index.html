@@ -20,6 +20,7 @@
 <h2>Real-Time Clock (AJAX)</h2>
 <h1 id="datetime">Loading...</h1>
 
+richy
 <script>
 function loadDateTime() {
     fetch('/api/servertime')
@@ -35,3 +36,4 @@ setInterval(loadDateTime, 1000);
 loadDateTime();
 </script>
 {% endblock %}
+
