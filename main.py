@@ -216,10 +216,10 @@ def pvs_upload(request: Request):
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-import easyocr
-import re
+# import easyocr
+# import re
 
-reader = easyocr.Reader(['th','en'])
+# reader = easyocr.Reader(['th','en'])
 
 def parse_thai_datetime(text):
     thai_months = {
