@@ -1,6 +1,9 @@
 fastapi[standard]
 sqlalchemy
 jinja2
-easyocr
+# easyocr
 itsdangerous
 pyjwt
+pytest
+
+
