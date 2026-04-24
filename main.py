@@ -388,3 +388,4 @@ def grade_api(score:float = None):
     elif score >= 75 and score < 85:
         return {'grade': 'B'}
     return {'grade': 'F'}
+
